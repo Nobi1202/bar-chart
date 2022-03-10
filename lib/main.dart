@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
 void main() {
@@ -34,8 +33,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   late List<GDPData> _chartData;
 
-
-
   @override
   void initState() {
     super.initState();
@@ -56,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
               'Aug 1 - Aug 7, 2021',
             ),
-           _buildChart()
+            _buildChart()
           ],
         ),
       ),
@@ -71,18 +68,22 @@ class _MyHomePageState extends State<MyHomePage> {
             _createSampleData(),
             vertical: false,
             primaryMeasureAxis: const charts.NumericAxisSpec(
-                showAxisLine: false),
+              showAxisLine: false,
+              tickProviderSpec: charts.BasicNumericTickProviderSpec(
+                desiredMinTickCount: 6,
+                desiredMaxTickCount: 6,
+              ),
+            ),
             domainAxis: const charts.OrdinalAxisSpec(
-                showAxisLine: false, ),
+              showAxisLine: false,
+            ),
             layoutConfig: charts.LayoutConfig(
                 leftMarginSpec: charts.MarginSpec.fixedPixel(30),
                 topMarginSpec: charts.MarginSpec.fixedPixel(0),
                 rightMarginSpec: charts.MarginSpec.fixedPixel(30),
-                bottomMarginSpec: charts.MarginSpec.fixedPixel(0)
-            ),
+                bottomMarginSpec: charts.MarginSpec.fixedPixel(0)),
             defaultRenderer: charts.BarRendererConfig(
                 cornerStrategy: const charts.ConstCornerStrategy(30)),
-
           ),
           shaderCallback: (Rect bounds) {
             return const LinearGradient(
@@ -104,7 +105,6 @@ class _MyHomePageState extends State<MyHomePage> {
       GDPData('Fr', 8),
       GDPData('Sa', 6),
       GDPData('Su', 5),
-
     ];
 
     return [
